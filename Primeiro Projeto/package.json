@@ -1,0 +1,10 @@
+{
+  "name": "aprendendo-nodejs",
+  "version": "1.0.0",
+  "description": "Primerio Projeto Nodejs",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Pedro77h",
+  "license": "MIT"
+}
