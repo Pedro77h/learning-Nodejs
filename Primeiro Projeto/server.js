@@ -22,7 +22,7 @@ http
 
         response.end(
             JSON.stringify({
-                message: "Qualquer outra Rota"
+                message: "Qualquer outra rota"
             })
         )
 

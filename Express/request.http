@@ -1,0 +1,10 @@
+POST http://localhost:4030/produtos
+Content-Type: application/json
+
+{
+    "name": "Caderno" ,
+    "price": 20
+}
+
+
+GET http://localhost:4030/produtos
