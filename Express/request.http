@@ -2,9 +2,28 @@ POST http://localhost:4030/produtos
 Content-Type: application/json
 
 {
-    "name": "Caderno" ,
-    "price": 20
+    "name": "Pirulito" ,
+    "price": 0.2
 }
 
+###
 
 GET http://localhost:4030/produtos
+
+###
+
+GET http://localhost:4030/produtos/311efa30-a9c0-4760-817d-cfea5c861c6e
+
+###
+
+PUT http://localhost:4030/produtos/abc09b07-7838-4f39-9787-cee84d663924
+Content-Type: application/json
+
+{
+    "name": "Xilito" ,
+    "price": 0.6
+}
+
+###
+
+DELETE http://localhost:4030/produtos/79eb5ce-9bdc-4346-ae0e-07de40419055
