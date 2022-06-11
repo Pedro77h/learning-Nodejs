@@ -2,8 +2,8 @@ POST http://localhost:4030/produtos
 Content-Type: application/json
 
 {
-    "name": "Pirulito" ,
-    "price": 0.2
+    "name": "Xilito" ,
+    "price": 0.5
 }
 
 ###

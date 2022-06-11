@@ -7,6 +7,8 @@ const fs = require("fs")
 const app = express()
 let products = []
 
+
+
 fs.readFile("products.json" , "utf-8" , (err , data)=>{
     if(err){
         console.log(err)
