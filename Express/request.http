@@ -2,8 +2,8 @@ POST http://localhost:4030/produtos
 Content-Type: application/json
 
 {
-    "name": "Pirulito" ,
-    "price": 0.2
+    "name": "Bala doce" ,
+    "price": 0.1
 }
 
 ###
@@ -12,18 +12,17 @@ GET http://localhost:4030/produtos
 
 ###
 
-GET http://localhost:4030/produtos/311efa30-a9c0-4760-817d-cfea5c861c6e
-
+GET http://localhost:4030/produtos/ccc3cf68-15e8-4fb8-8073-f2903af83f2d
 ###
 
-PUT http://localhost:4030/produtos/abc09b07-7838-4f39-9787-cee84d663924
+PUT http://localhost:4030/produtos/ccc3cf68-15e8-4fb8-8073-f2903af83f2d
 Content-Type: application/json
 
 {
-    "name": "Xilito" ,
-    "price": 0.6
+    "name": "Bala Salgada" ,
+    "price": 0.1
 }
 
 ###
 
-DELETE http://localhost:4030/produtos/79eb5ce-9bdc-4346-ae0e-07de40419055
+DELETE http://localhost:4030/produtos/c650a779-384d-43e5-9a66-4278b1bcd6e2
