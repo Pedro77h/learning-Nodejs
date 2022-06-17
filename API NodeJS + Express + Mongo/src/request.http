@@ -1,8 +1,8 @@
-POST http://localhost:4030/auth
+POST http://localhost:4030/auth/register
 Content-Type: application/json
 
 {
-    "name": "Pedro" ,
-    "email": "Pedrohenrique@gmail.com",
-    "password": "pedro123"
+    "name": "Douglas" ,
+    "email": "DouglasNeres@gmail.com" ,
+    "password": "Douglas123"
 }
