@@ -1,7 +1,7 @@
 
 const express = require("express")
 
-const User = require("../models/user.js")
+const User = require('../model/user')
 
 
 const router = express.Router()
@@ -15,7 +15,7 @@ router.post("/register" , async (request , response) =>{
         
 
     } catch (err){
-        return response.status(400).send({ err })
+        return response.status(400).send({ error: "Registration Failed" })
     }
 
 })

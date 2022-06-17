@@ -8,7 +8,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false}))
 
 
-require("./controls/authcontroller")(app)
+require('./controls/authcontroller')(app);
 
 
 app.listen("4030")
