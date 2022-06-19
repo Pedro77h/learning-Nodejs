@@ -2,7 +2,21 @@ POST http://localhost:4030/auth/register
 Content-Type: application/json
 
 {
-    "name": "Douglas" ,
-    "email": "DouglasNeres@gmail.com" ,
-    "password": "Douglas123"
+    "name": "Mamae" ,
+    "email": "Mamae@gmail.com" ,
+    "password": "mamae123"
 }
+
+###
+
+POST http://localhost:4030/auth/authenticate
+Content-Type: application/json
+
+{
+    "email": "Mamae@gmail.com" ,
+    "password": "mamae123"
+}
+
+###
+
+GET http://localhost:4030/auth/projects

@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false}))
 
 
 require('./controls/authcontroller')(app);
+require('./controls/projectcontrol')(app);
 
 
 app.listen("4030", () => console.log("O servidor esta onlne"))
