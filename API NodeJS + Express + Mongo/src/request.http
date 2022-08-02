@@ -2,8 +2,8 @@ POST http://localhost:4030/auth/register
 Content-Type: application/json
 
 {
-    "name": "voltei" ,
-    "email": "guesswhosback@gmail.com" ,
+    "name": "testparams" ,
+    "email": "params@gmail.com" ,
     "password": "mamae123"
 }
 
@@ -13,14 +13,14 @@ POST http://localhost:4030/auth/authenticate
 Content-Type: application/json
 
 {
-    "email": "mamae@gmail.com" ,
+    "email": "params@gmail.com" ,
     "password": "mamae123"
 }
 
 ###
 
 GET http://localhost:4030/projects
-Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTkzNzk2NjEsImV4cCI6MTY1OTQ2NjA2MX0.RhPBvS7Qx8P5VrWK-By8wqY5mMnXw3tE7Tkko2MJ-ME"
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTk0Nzk3MDcsImV4cCI6MTY1OTU2NjEwN30.trYofp_rtQuegp7uDffVDJgxDrj9vqyo0XExAQlpKLY
 
 
 
