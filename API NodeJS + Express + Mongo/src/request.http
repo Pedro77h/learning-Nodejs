@@ -20,7 +20,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:4030/projects
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTk0Nzk3MDcsImV4cCI6MTY1OTU2NjEwN30.trYofp_rtQuegp7uDffVDJgxDrj9vqyo0XExAQlpKLY
+authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTk0ODQ2MjgsImV4cCI6MTY1OTU3MTAyOH0.CnfAMQxQLGfe2Ivt0IRsOudrfz1gFBQgxOWtVDsEIHw"
 
 
 
