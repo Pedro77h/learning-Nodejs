@@ -8,7 +8,7 @@ const router = express.Router()
 router.use(authmidleware)
 
 router.get("/", (request, response) => {
-    response.send({ ok: true })
+    response.send({ ok: true , user: req.user.id})
 })
 
 module.exports = app => app.use('/projects' , router)
