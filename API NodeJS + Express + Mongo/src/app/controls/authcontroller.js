@@ -1,6 +1,7 @@
 const express = require("express")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const crypto = require('crypto')
 const authConfig = require("../../config/auth.json")
 const User = require('../model/user')
 
@@ -28,9 +29,9 @@ router.post("/register", async (request, response) => {
 
         user.password = undefined
 
-        return response.send({ 
-            user, 
-            token: Generatetoken({id: user.id}) 
+        return response.send({
+            user,
+            token: Generatetoken({ id: user.id })
         })
 
 
@@ -58,10 +59,39 @@ router.post('/authenticate', async (request, response) => {
     user.password = undefined
 
 
-    response.send({ 
-        user, 
-        token: Generatetoken({id: user.id}) 
+    response.send({
+        user,
+        token: Generatetoken({ id: user.id })
     })
+})
+
+router.post('/forgot_password', async (req, res) => {
+    const { email } = req.body
+
+    try {
+        const user = await User.findOne({ email })
+
+        if(!user){
+            return res.status(400).send({error: 'user not found'})
+        }
+
+        const token = crypto.randomBytes(20).toString('hex')
+
+        const date = new Date()
+
+        date.setHours(date.getHours()+ 1)
+
+        await User.findByIdAndUpdate(user.id , {
+            '$set':{
+                passwordResetToken: token ,
+                passwordResetExpires: date
+            }
+        })
+
+    }
+    catch{
+        res.status(400).send({error: 'erro on forgot password , try again :('})
+    }
 })
 
 module.exports = app => app.use("/auth", router)
