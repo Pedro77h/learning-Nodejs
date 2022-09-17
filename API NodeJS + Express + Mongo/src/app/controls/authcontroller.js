@@ -76,7 +76,7 @@ router.post('/forgot_password', async (req, res) => {
             return res.status(400).send({ error: 'user not found' })
         }
 
-        const token = crypto.randomBytes(20).toString('hex')
+        const token = Generatetoken({})
 
         const date = new Date()
 
@@ -89,6 +89,8 @@ router.post('/forgot_password', async (req, res) => {
             }
         })
 
+
+
         mailer.sendMail({
             to: email,
             from: 'bunter@yahoo.com.br',
@@ -96,16 +98,53 @@ router.post('/forgot_password', async (req, res) => {
             context: { token }
         })
             , (err) => {
-                if (err) 
-                return res.status(400),send({error: 'cannot send forgot password email'})
+                if (err)
+                    return res.status(400).send({ error: 'cannot send forgot password email' })
                 console.log(err)
             }
-            return res.send()
+        return res.send()
     }
-    catch(err) {
-        
+    catch (err) {
+
         res.status(400).send({ error: 'erro on forgot password , try again :(' })
     }
 })
+
+router.post('/reset_password', async (req, res) => {
+    const { email, token, newpassword } = req.body
+
+    try {
+
+        const user =await User.findOne({ email }).select('+passwordResetToken passwordResetExpires' )
+
+
+        if (!user) {
+            return res.status(400).send({ error: 'user not found' })
+        }
+
+        if (token !== user.passwordResetToken) {
+            console.log(token , user.passwordResetToken)
+            return res.status(400).send({ error: 'token invalid' })
+            
+        }
+        const now = new Date()
+
+        if (now > user.passwordResetExpires) {
+            return res.status(400).send({ error: 'token expired , generate a new one' })
+        }
+
+        user.password = newpassword
+
+        await user.save()
+
+        res.send()
+
+    } catch (err) {
+        res.status(400).send({ error: "reset password error" })
+        console.log(err)
+    }
+})
+
+
 
 module.exports = app => app.use("/auth", router)
