@@ -1,5 +1,6 @@
 const mongoose = require("../../database")
 const bcrypt = require('bcryptjs')
+const user = require('../model/user')
 
 const ProjectSchema = new mongoose.Schema({
     title: {
@@ -26,6 +27,6 @@ const ProjectSchema = new mongoose.Schema({
 
 });
 
-const Project = mongoose.model("Project" , ProjectSchema)
+const Projects = mongoose.model("Project" , ProjectSchema)
 
-module.exports = Project
+module.exports = Projects
