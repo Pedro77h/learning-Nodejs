@@ -100,7 +100,6 @@ router.post('/forgot_password', async (req, res) => {
             , (err) => {
                 if (err)
                     return res.status(400).send({ error: 'cannot send forgot password email' })
-                console.log(err)
             }
         return res.send()
     }
@@ -123,7 +122,6 @@ router.post('/reset_password', async (req, res) => {
         }
 
         if (token !== user.passwordResetToken) {
-            console.log(token , user.passwordResetToken)
             return res.status(400).send({ error: 'token invalid' })
             
         }
@@ -141,7 +139,7 @@ router.post('/reset_password', async (req, res) => {
 
     } catch (err) {
         res.status(400).send({ error: "reset password error" })
-        console.log(err)
+        
     }
 })
 
