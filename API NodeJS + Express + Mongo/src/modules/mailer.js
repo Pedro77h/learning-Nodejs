@@ -18,6 +18,7 @@ transport.use('compile', hbs({
     layoutsDir: './src/resources/mail/auth',
     defaultLayout: 'forgot_password',
   },
+  
   viewPath: path.resolve('./src/resources/mail/'),
   extName: '.html'
 }))
