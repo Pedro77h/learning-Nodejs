@@ -1,6 +1,6 @@
 const mongoose = require("../../database")
 const bcrypt = require('bcryptjs')
-const user = require('../model/user')
+const User = require('./user')
 
 const ProjectSchema = new mongoose.Schema({
     title: {
