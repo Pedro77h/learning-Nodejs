@@ -7,10 +7,17 @@ const msgSchema = new Schema({
         type: String , 
         required: true 
     } ,
-    img: {
-        type: String , 
-        required: false ,
+    assignedTo: {
+        type: Schema.Types.ObjectId ,
+        ref: 'User' , 
+        required: true ,
     } , 
+    receiver:{
+        type: Schema.Types.ObjectId ,
+        ref: 'User' ,
+        require: true , 
+    } , 
+
     creatAt: {
         type: Date , 
         default: Date.now

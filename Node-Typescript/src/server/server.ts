@@ -3,13 +3,16 @@ import bodyparser from 'body-parser'
 import { Server } from '@overnightjs/core'
 import mongoose from 'mongoose'
 import cors from 'cors'
+import userRouter from '../routers/user.router'
+
 
 export class serverInit extends Server {
     constructor(private port = 4030){
         super()
         this.setupExpress()
-        this.routes()
         this.database()
+        this.routes()
+        this.getApp()
     }
 
     public getApp():void{
@@ -29,13 +32,12 @@ export class serverInit extends Server {
         mongoose.connect('mongodb://localhost/typescript')
     }
 
-    private routes():void {
-        this.app.get('/' , (req , res) =>{
-            res.status(200).send({msg: "OK"})
-        })
-
+    private routes():void{
+        this.app.use('/user' , userRouter)
     }
 
-
 }
+
+
+
 
