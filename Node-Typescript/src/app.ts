@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/class-name-casing */
+/* eslint-disable @typescript-eslint/class-name-casing */
 import bodyparser from 'body-parser'
 import { Server } from '@overnightjs/core'
 import mongoose from 'mongoose'
 import cors from 'cors'
-import userRouter from '../routers/user.router'
+import userRouter from './routers/user.router'
 
 
 export class serverInit extends Server {
@@ -39,5 +40,5 @@ export class serverInit extends Server {
 }
 
 
-
+new serverInit(4030)
 

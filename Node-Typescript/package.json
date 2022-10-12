@@ -4,7 +4,7 @@
   "description": "Template de configurações para utilizar o NodeJS em conjunto com o TypeScript",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts",
+    "start": "nodemon src/app.ts",
     "build": "sucrase ./src -d ./dist --transforms typescript,imports"
   },
   "keywords": [],
@@ -16,6 +16,7 @@
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.14",
     "@types/jest": "^29.1.1",
+    "@types/jsonwebtoken": "^8.5.9",
     "@types/module-alias": "^2.0.1",
     "@types/mongoose": "^5.11.97",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
@@ -39,6 +40,7 @@
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "mongoose": "^6.6.3",
     "path": "^0.12.7"

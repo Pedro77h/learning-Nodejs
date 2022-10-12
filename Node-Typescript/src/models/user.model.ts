@@ -3,7 +3,9 @@ import bcrypt from "bcrypt";
 import { userInterface } from "@src/interface/user.interface";
 
 // eslint-disable-next-line @typescript-eslint/class-name-casing
-interface userModel extends  userInterface , Document{}
+export interface userModelInterface extends  userInterface , Document{
+   comparePass(pass:string):Promise<string>
+}
 
 
 const userSchema = new Schema({
@@ -25,15 +27,29 @@ const userSchema = new Schema({
     img: {
         type: String , 
         required: false ,
-    }
+    } 
 
 })
 
 
-userSchema.pre<userModel>('save' ,  async function(next) {
-    const hash = await bcrypt.hash(this.password , 10)
-    this.password = hash
+userSchema.pre<userModelInterface>('save' ,  async function(next) {
+     
+    this.password = await bcrypt.hash(this.password , 10)
 
     next()
 })
-export default model('User' , userSchema )
+
+userSchema.pre<userModelInterface>('save' , async function generateAvatar(next) {
+    const randomId = Math.floor(Math.random() * (1000000)) + 1
+
+    this.img = `https://api.adorable.io/avatars/285/${randomId}.png`
+
+
+} )
+
+userSchema.methods.comparePass = function(pass:string):Promise<boolean> {
+    return bcrypt.compare(pass , this.password)
+}
+
+
+export default model<userModelInterface>('User' , userSchema )
