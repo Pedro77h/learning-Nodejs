@@ -47,9 +47,15 @@ class userController {
             if(!await User?.comparePass(password)){
                 return res.status(400).send({error: 'password doesn´t match'})
             }
+
+            const token = User?.generateToken({id: User.id})
+            
             
 
-            return res.status(200).send({Message: 'ok'})
+            return res.status(200).send({
+                User: User ,
+                token
+            })
         } catch (err) {
             return res.status(400)
         }
