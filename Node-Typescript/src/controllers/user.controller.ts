@@ -36,24 +36,23 @@ class userController {
     public async authenticate(req: Request, res: Response): Promise<Response> {
         try {
             const { email, password } = req.body
-
             const User = await userModel.findOne({ email }).select('+password')
 
             if (!User) {
                 res.status(400).send({ error: 'User doesn´t exist' })
             }
-            
-            
-            if(!await User?.comparePass(password)){
-                return res.status(400).send({error: 'password doesn´t match'})
+
+
+            if (!await User?.comparePass(password)) {
+                return res.status(400).send({ error: 'password doesn´t match' })
             }
 
-            const token = User?.generateToken({id: User.id})
-            
-            
+            const token = User?.generateToken({ id: User.id })
+
+
 
             return res.status(200).send({
-                User: User ,
+                User,
                 token
             })
         } catch (err) {

@@ -1,12 +1,12 @@
 import { model, Schema, Document } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
-import { authconfig } from '@src/config/auth.config'
-import { userInterface } from "@src/interface/user.interface";
+import { authconfig } from '../config/auth.config'
+import { userInterface } from "../interface/user.interface";
 
 
 // eslint-disable-next-line @typescript-eslint/class-name-casing
-export interface userModelInterface extends userInterface, Document {
+export interface userModelInterface extends userInterface {
     comparePass(pass: string): Promise<string>
     generateToken(params:object):string
 }
@@ -46,7 +46,7 @@ userSchema.pre<userModelInterface>('save', async function (next) {
 userSchema.pre<userModelInterface>('save', async function generateAvatar(next) {
     const randomId = Math.floor(Math.random() * (1000000)) + 1
 
-    this.img = `https://api.adorable.io/avatars/285/${randomId}.png`
+    this.img = `https://avatars.dicebear.com/api/identicon/${randomId}.svg`
 
 
 })

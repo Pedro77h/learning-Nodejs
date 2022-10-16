@@ -5,6 +5,7 @@ import { Server } from '@overnightjs/core'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import userRouter from './routers/user.router'
+import messageRoute from './routers/message.route'
 
 
 export class serverInit extends Server {
@@ -35,6 +36,7 @@ export class serverInit extends Server {
 
     private routes():void{
         this.app.use('/user' , userRouter)
+        this.app.use('/message' , messageRoute)
     }
 
 }
