@@ -29,12 +29,13 @@ class authMiddleware {
 
             const iD = verify(token, authconfig.secret) as userInterface
 
-            req.user = iD
+
+            req.user = iD.id
 
             return next()
 
         } catch (err) {
-
+            console.log(err)
             return res.status(400).send({ error: "token error" })
         }
 

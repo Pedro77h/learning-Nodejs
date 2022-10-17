@@ -50,7 +50,6 @@ class userController {
             const token = User?.generateToken({ id: User.id })
 
 
-
             return res.status(200).send({
                 User,
                 token

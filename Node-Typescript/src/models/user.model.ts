@@ -57,7 +57,8 @@ userSchema.methods.comparePass = function (pass: string): Promise<boolean> {
 
 userSchema.methods.generateToken = function (params:object): string {
    return jwt.sign(params , authconfig.secret , {
-        expiresIn: 86400
+        expiresIn: 86400 ,
+        noTimestamp: true
     })
 }
 

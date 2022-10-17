@@ -2,18 +2,20 @@
 import mongoose from "mongoose";
 import messageModel from "../models/message.model";
 import { Request, Response } from "express";
+import { ObjectId } from "mongodb"
 
 class mensageController {
 
     public async send(req: Request, res: Response): Promise<Response> {
         try {
+
             const message = await messageModel.create({
                 text: req.body.text,
                 assignedTo: req.user ,
                 receiver: req.params._id
             })
 
-            console.log({message})
+            console.log(message.assignedTo)
         
             return res.send({ message })
         } catch (err) {
