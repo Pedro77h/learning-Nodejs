@@ -1,13 +1,14 @@
 import { authconfig } from "../config/auth.config";
 import { NextFunction, Request, Response } from "express";
 import { decode, verify } from "jsonwebtoken"
-import { userInterface } from "@src/interface/user.interface";
+import { userInterface } from "../interface/user.interface";
+import userModel from "../models/user.model";
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 class authMiddleware {
 
-    public authUserbytoken(req: Request, res: Response, next: NextFunction){
-        try{
+    public authUserbytoken(req: Request, res: Response, next: NextFunction) {
+        try {
             const authHeader = req.headers.authorization
 
             if (!authHeader) {
@@ -39,13 +40,28 @@ class authMiddleware {
             return res.status(400).send({ error: "token error" })
         }
 
+    }
 
+    public async authUserbyParams(req: Request, res: Response, next: NextFunction) {
+        try {
 
+            const user = await userModel.findById(req.params.id)
+            
+            if(!user){
+                res.status(400).send({error: "User not found"})
 
+            }
 
+            req.userChat = user
 
+        } catch (err) {
+            res.status(401).send({error: "User Invalid"})
+            console.log(err)
+        }
     }
 
 }
+
+
 
 export default new authMiddleware

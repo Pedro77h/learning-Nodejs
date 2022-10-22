@@ -4,7 +4,16 @@ import { Router } from "express";
 
 const messageRoute = Router()
 
-messageRoute.post('/:_id' , authMiddleware.authUserbytoken, messageController.send)
+messageRoute.post('/:id' ,
+authMiddleware.authUserbyParams ,
+authMiddleware.authUserbytoken, 
+messageController.send
+)
 
+messageRoute.get('/:id' ,
+authMiddleware.authUserbyParams ,
+authMiddleware.authUserbytoken, 
+messageController.list
+)
 
 export default messageRoute

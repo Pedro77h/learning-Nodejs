@@ -1,4 +1,8 @@
+/* eslint-disable @typescript-eslint/class-name-casing */
+import { messageInterface } from "@src/interface/message.interface";
 import { model, Schema } from "mongoose";
+
+interface messageModel extends messageInterface , Document {}
 
 
 const msgSchema = new Schema({
@@ -26,4 +30,4 @@ const msgSchema = new Schema({
 })
 
 
-export default model('Msg' , msgSchema )
+export default model<messageModel>('Msg' , msgSchema )

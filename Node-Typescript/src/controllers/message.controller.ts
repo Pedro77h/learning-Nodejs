@@ -11,19 +11,29 @@ class mensageController {
 
             const message = await messageModel.create({
                 text: req.body.text,
-                assignedTo: req.user ,
-                receiver: req.params._id
+                assignedTo: req.user,
+                receiver: req.userChat.id
             })
 
-            console.log(message.assignedTo)
-        
             return res.send({ message })
         } catch (err) {
 
             console.log(err)
-            return res.status(400).send({err})
+            return res.status(400).send({ err })
         }
 
+    }
+
+    public async list(req: Request, res: Response) {
+        const idUserLogged = req.user.id
+        const idUserChat = req.userChat.id
+
+        const message = await messageModel.find({
+            $or: [
+                { $and: [{user: idUserLogged} , {receiver: idUserChat}]} ,
+                { $and: [{user: idUserChat} , {receiver: idUserLogged}]}
+            ]
+        })
     }
 
 }
