@@ -5,7 +5,7 @@ import { Router } from "express";
 const messageRoute = Router()
 
 messageRoute.post('/:id' ,
-authMiddleware.authUserbyParams ,
+authMiddleware.authUserbyParams , 
 authMiddleware.authUserbytoken, 
 messageController.send
 )

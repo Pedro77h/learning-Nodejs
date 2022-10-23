@@ -12,7 +12,7 @@ class mensageController {
             const message = await messageModel.create({
                 text: req.body.text,
                 assignedTo: req.user,
-                receiver: req.userChat.id
+                receiver: req.userChat._id
             })
 
             return res.send({ message })
@@ -24,16 +24,27 @@ class mensageController {
 
     }
 
-    public async list(req: Request, res: Response) {
-        const idUserLogged = req.user.id
-        const idUserChat = req.userChat.id
+    public async list(req: Request, res: Response):Promise<Response> {
+        const idUserLogged = req.user
+        const idUserChat = req.userChat._id
 
         const message = await messageModel.find({
             $or: [
                 { $and: [{user: idUserLogged} , {receiver: idUserChat}]} ,
                 { $and: [{user: idUserChat} , {receiver: idUserLogged}]}
             ]
+        }).sort('creatAt')
+
+
+        const messageChat = message.map(message =>{
+            return {
+                text:message.text , 
+                createdAt: message.creatAt ,
+                isSender: message.assignedTo == String(idUserLogged)
+            }
         })
+
+        return res.status(200).send(messageChat)
     }
 
 }

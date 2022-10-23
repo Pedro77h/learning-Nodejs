@@ -3,5 +3,5 @@ export interface messageInterface{
     text?: string ,
     assignedTo?: string , 
     receiver?: string ,
-    createdAt?: Date
+    creatAt?: Date
 }

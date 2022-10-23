@@ -59,6 +59,9 @@ class userController {
         }
     }
 
+    public getById(req:Request , res:Response){
+        return res.status(200).send(req.userChat)
+    }
 }
 
 export default new userController()

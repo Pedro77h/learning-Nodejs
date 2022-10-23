@@ -31,6 +31,7 @@ class authMiddleware {
             const iD = verify(token, authconfig.secret) as userInterface
 
 
+
             req.user = iD.id
 
             return next()
@@ -42,17 +43,20 @@ class authMiddleware {
 
     }
 
-    public async authUserbyParams(req: Request, res: Response, next: NextFunction) {
+    public async authUserbyParams(req: Request, res: Response, next: NextFunction){
         try {
-
+            
             const user = await userModel.findById(req.params.id)
             
+
             if(!user){
                 res.status(400).send({error: "User not found"})
 
             }
 
             req.userChat = user
+
+            return next()
 
         } catch (err) {
             res.status(401).send({error: "User Invalid"})
