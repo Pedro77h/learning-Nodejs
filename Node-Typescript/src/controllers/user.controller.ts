@@ -59,9 +59,27 @@ class userController {
         }
     }
 
-    public getById(req:Request , res:Response){
+    public getById(req: Request, res: Response): Response {
+
+        req.userChat.password = undefined
+
         return res.status(200).send(req.userChat)
     }
+
+    public async list(req: Request, res: Response): Promise<Response>{
+        const idUser = req.user
+
+
+        const users = await userModel.find({
+            _id: { $ne: idUser }
+        })
+
+        
+
+        return res.status(200).send(users)
+
+    }
+
 }
 
 export default new userController()

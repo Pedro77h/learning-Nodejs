@@ -36,6 +36,9 @@
     "ts-node-dev": "^2.0.0",
     "typescript": "^3.8.3"
   },
+  "_moduleAliases": {
+    "@src": "dist/src"
+  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
