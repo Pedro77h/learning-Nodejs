@@ -2,6 +2,7 @@ import userModel from "../models/user.model";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt"
 import { userModelInterface } from "@src/models/user.model"
+import messageModel from "../models/message.model";
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 class userController {
@@ -74,8 +75,14 @@ class userController {
             _id: { $ne: idUser }
         })
 
-        
 
+        const userMessage = users.map(user =>{
+            return messageModel.searchChat(idUser , user._id)
+            .sort('-creatAt')
+            .limit(1)
+        })
+
+        
         return res.status(200).send(users)
 
     }
