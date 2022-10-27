@@ -6,7 +6,7 @@ import { Document, Model, model, Query, Schema } from "mongoose";
 interface messageModel extends messageInterface, Document { }
 
 interface messageStatic extends Model<messageModel> {
-    searchChat(idUserLogged: string, idUserChat: string):Query<messageModel[] , messageModel>
+    searchChat(idUserLogged: string, idUserChat: string):Query<messageModel[] , messageModel> 
 }
 
 
@@ -35,7 +35,7 @@ const msgSchema = new Schema({
 })
 
 
-msgSchema.statics.searchChat = function (idUserLogged: string, idUserChat: string): Model<messageModel[], messageModel> {
+msgSchema.statics.searchChat =  function (idUserLogged: string, idUserChat: string): Query<messageModel[], messageModel>{
     return this.find({
         $or: [
             { $and: [{ user: idUserLogged }, { receiver: idUserChat }] },
@@ -44,4 +44,4 @@ msgSchema.statics.searchChat = function (idUserLogged: string, idUserChat: strin
     })
 }
 
-export default model<messageModel , messageStatic>('Msg', msgSchema)
+export default model<messageModel , messageStatic>('msg', msgSchema)

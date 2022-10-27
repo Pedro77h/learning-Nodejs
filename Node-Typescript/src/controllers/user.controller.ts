@@ -76,14 +76,22 @@ class userController {
         })
 
 
-        const userMessage = users.map(user =>{
-            return messageModel.searchChat(idUser , user._id)
+         const userMessage = users.map(async user =>{
+            return await messageModel.searchChat(idUser , user._id)
             .sort('-creatAt')
             .limit(1)
-        })
+            .map(messages =>{
+               return { 
+                _id: user._id ,
+                name: user.name ,
+                img: user.img ,
+                lastMessage: messages[0] ? messages[0].text: null ,
+                dateLastMessage: messages[0] ? messages[0].creatAt : null
+               }
+            })
+        }) 
 
-        
-        return res.status(200).send(users)
+        return res.status(200).send(userMessage)
 
     }
 
