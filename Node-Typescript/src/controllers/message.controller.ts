@@ -2,7 +2,6 @@
 import mongoose from "mongoose";
 import messageModel from "../models/message.model";
 import { Request, Response } from "express";
-import { ObjectId } from "mongodb"
 
 class mensageController {
 
@@ -28,7 +27,7 @@ class mensageController {
         const idUserLogged = req.user
         const idUserChat = req.userChat._id
 
-        const message = await messageModel.searchChat(idUserLogged , idUserChat).sort('creatAt')
+        const message = await messageModel.searchChat(idUserLogged , idUserChat).sort('creatAt') 
 
 
         const messageChat = message.map(message =>{

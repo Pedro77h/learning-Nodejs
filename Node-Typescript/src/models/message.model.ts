@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/class-name-casing */
 import { messageInterface } from "@src/interface/message.interface";
-import { Document, Model, model, Query, Schema } from "mongoose";
+import { Document, DocumentQuery, Model, model, Query, Schema,  } from "mongoose"
 
 
 interface messageModel extends messageInterface, Document { }
 
 interface messageStatic extends Model<messageModel> {
-    searchChat(idUserLogged: string, idUserChat: string):Query<messageModel[] , messageModel> 
+    searchChat(idUserLogged: string, idUserChat: string): DocumentQuery<messageModel[] , messageModel>
 }
 
 
@@ -35,7 +35,7 @@ const msgSchema = new Schema({
 })
 
 
-msgSchema.statics.searchChat =  function (idUserLogged: string, idUserChat: string): Query<messageModel[], messageModel>{
+msgSchema.statics.searchChat = function (idUserLogged: string, idUserChat: string): DocumentQuery<messageModel[] , messageModel> {
     return this.find({
         $or: [
             { $and: [{ user: idUserLogged }, { receiver: idUserChat }] },
@@ -44,4 +44,4 @@ msgSchema.statics.searchChat =  function (idUserLogged: string, idUserChat: stri
     })
 }
 
-export default model<messageModel , messageStatic>('msg', msgSchema)
+export default model<messageModel, messageStatic>('msg', msgSchema)

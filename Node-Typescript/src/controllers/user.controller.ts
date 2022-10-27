@@ -48,7 +48,7 @@ class userController {
                 return res.status(400).send({ error: 'password doesn´t match' })
             }
 
-            const token = User?.generateToken({ id: User.id })
+            const token = User?.generateToken({ id: User._id })
 
 
             return res.status(200).send({
@@ -67,7 +67,7 @@ class userController {
         return res.status(200).send(req.userChat)
     }
 
-    public async list(req: Request, res: Response): Promise<Response>{
+    public async list(req: Request, res: Response): Promise<Response> {
         const idUser = req.user
 
 
@@ -76,22 +76,25 @@ class userController {
         })
 
 
-         const userMessage = users.map(async user =>{
-            return await messageModel.searchChat(idUser , user._id)
-            .sort('-creatAt')
-            .limit(1)
-            .map(messages =>{
-               return { 
-                _id: user._id ,
-                name: user.name ,
-                img: user.img ,
-                lastMessage: messages[0] ? messages[0].text: null ,
-                dateLastMessage: messages[0] ? messages[0].creatAt : null
-               }
-            })
-        }) 
+        const result = await Promise.all(users.map( user => {
+            return messageModel.searchChat(idUser, user._id)
+                .sort('-creatAt')
+                .limit(1)
+                .map( messages => {
+                   console.log(messages)
+                   
+                    return  ({
+                        _id: user._id,
+                        name: user.name,
+                        img: user.img,
+                        lastMessage: messages[0] ? messages[0].text : null,
+                        dateLastMessage: messages[0] ? messages[0].creatAt : null
+                    })
+                }) 
+        }))
 
-        return res.status(200).send(userMessage)
+
+        return res.status(200).send(result)
 
     }
 
