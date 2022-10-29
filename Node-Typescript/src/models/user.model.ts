@@ -6,7 +6,7 @@ import { userInterface } from "../interface/user.interface";
 
 
 // eslint-disable-next-line @typescript-eslint/class-name-casing
-export interface userModelInterface extends userInterface {
+export interface userModelInterface extends userInterface , Document {
     comparePass(pass: string): Promise<string>
     generateToken(params:object):string
 }

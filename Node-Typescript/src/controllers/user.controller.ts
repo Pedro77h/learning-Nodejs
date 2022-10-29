@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt"
 import { userModelInterface } from "@src/models/user.model"
 import messageModel from "../models/message.model";
+import messageService from "../services/message.service";
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 class userController {
@@ -68,7 +69,7 @@ class userController {
     }
 
     public async list(req: Request, res: Response): Promise<Response> {
-        const idUser = req.user
+        const idUser = req.user._id
 
 
         const users = await userModel.find({
@@ -76,25 +77,16 @@ class userController {
         })
 
 
-        const result = await Promise.all(users.map( user => {
+        const userMessage = await Promise.all(users.map(user => {
             return messageModel.searchChat(idUser, user._id)
                 .sort('-creatAt')
                 .limit(1)
-                .map( messages => {
-                   console.log(messages)
-                   
-                    return  ({
-                        _id: user._id,
-                        name: user.name,
-                        img: user.img,
-                        lastMessage: messages[0] ? messages[0].text : null,
-                        dateLastMessage: messages[0] ? messages[0].creatAt : null
-                    })
-                }) 
+                .map(messages => messageService.getResponseUser(messages, user))
         }))
 
+        const orderMessage = messageService.orderedMessages(userMessage)
 
-        return res.status(200).send(result)
+        return res.status(200).send(orderMessage)
 
     }
 

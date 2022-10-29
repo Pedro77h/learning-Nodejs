@@ -31,7 +31,7 @@ export class serverInit extends Server {
     }
 
     private database():void {
-        mongoose.connect('mongodb://localhost/typescript')
+        mongoose.connect('mongodb://127.0.0.1:27017/typescript')
     }
 
     private routes():void{

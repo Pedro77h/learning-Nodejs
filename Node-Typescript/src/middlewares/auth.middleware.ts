@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { decode, verify } from "jsonwebtoken"
 import { userInterface } from "../interface/user.interface";
 import userModel from "../models/user.model";
+import { tokenInterface } from "@src/interface/token.interface";
 
 /* eslint-disable @typescript-eslint/class-name-casing */
 class authMiddleware {
@@ -28,16 +29,15 @@ class authMiddleware {
                 return res.status(401).send({ error: "token malformated" })
             }
 
-            const iD = verify(token, authconfig.secret) as userInterface
+            const iD = verify(token, authconfig.secret) as tokenInterface
 
 
+            req.user = iD
 
-            req.user = iD._id
 
             return next()
 
         } catch (err) {
-            console.log(err)
             return res.status(400).send({ error: "token error" })
         }
 
@@ -54,13 +54,13 @@ class authMiddleware {
 
             }
 
+
             req.userChat = user
 
             return next()
 
         } catch (err) {
             res.status(401).send({error: "User Invalid"})
-            console.log(err)
         }
     }
 

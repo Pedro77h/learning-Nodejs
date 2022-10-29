@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/class-name-casing */
 export interface messageInterface{
-    text?: string ,
-    assignedTo?: string , 
-    receiver?: string ,
-    creatAt?: Date
+    text: string ,
+    assignedTo: string , 
+    receiver: string ,
+    creatAt: Date
 }

@@ -23,17 +23,18 @@ class mensageController {
 
     }
 
-    public async list(req: Request, res: Response):Promise<Response> {
-        const idUserLogged = req.user
+    public async list(req: Request, res: Response): Promise<Response> {
+        const idUserLogged = req.user._id
         const idUserChat = req.userChat._id
 
-        const message = await messageModel.searchChat(idUserLogged , idUserChat).sort('creatAt') 
 
 
-        const messageChat = message.map(message =>{
+        const message = await messageModel.searchChat(idUserLogged, idUserChat).sort('creatAt')
+
+        const messageChat = message.map(message => {
             return {
-                text:message.text , 
-                createdAt: message.creatAt ,
+                text: message.text,
+                createdAt: message.creatAt,
                 isSender: message.assignedTo == String(idUserLogged)
             }
         })

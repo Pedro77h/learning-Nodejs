@@ -5,3 +5,10 @@ export interface userInterface {
     password?: string | any | Promise<string> , 
     img?: string
 }
+
+export interface messageUser extends userInterface {
+
+    lastMessage: string
+    dateLastMessage:Date
+
+}
